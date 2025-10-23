@@ -1,0 +1,413 @@
+리눅스
+
+지난시간 교재 48페이지까지 함
+
+0908
+51쪽 사용자 계정 관리 함
+사용자 추가
+danny
+020916^^
+
+53쪽
+슈퍼유저?=루트 계정
+사용자 추가/삭제, 소프트웨어설치, 시스템관리 가능
+보안상의 어떠한 제약도 받지 않는다는 위험이 있음
+그래서 루트로 로그인하지 않음
+보안상의 이유로 직접 이 계정으로 로그인하지 않음
+그래서 일반 사용자에게 슈퍼유저(관리자)의 권한을 부여함
+= $sudo 명령어 사용
+
+sudo apt install gcc
+sudo passwd root
+gom1234!!
+
+사용자 변경(switch user)
+su 하면 바로 루트 계정으로 로그인 됨
+프롬프트가 #으로 됨 $가 아니고
+su student 하면 원래로 돌아옴
+
+54쪽
+사용자 추가하기
+# useradd
+$ sudo useradd
+
+# useradd -m hong 사용자 추가
+# cat /etc/passwd 등록 확인
+
+$ sudo groupadd cs
+$ cat /etc/group | sort (알파벳 순으로 정렬해서 보겠다)
+$ sudo useradd -m -g cs hong
+$ cat /etc/passwd
+$ id hong2(사용자 정보 확인)
+유저아이디, 그룹아이디, 그룹
+
+생성된 사용자 계정의 홈 디렉토리 내용 확인
+$ sudo ls -asl /home/hong2
+list all size long
+
+사용자 삭제
+$ sudo userdel -r hong2
+
+그룹 추가 55~56쪽 이미 함
+
+2장 리눅스 사용
+
+date 날짜확인
+hostname
+uname
+사용자 확인 who
+디렉토리 확인 ls
+화면 클리어 clear
+man date 데이트에 대해 알려줘 manual이라는 뜻
+
+파일 -
+디렉토리 d
+내 위치 . 내 상위 위치 ..
+특수파일 /dev
+심볼릭 링크 파일 = 경로명 저장하는 파일 ln
+
+디렉토리 만들기 mkdir
+각 사용자마다 별도의 홈 디렉토리 있음
+pwd 현재 작업 중인 디렉토리 출력
+print working directory
+mkdir test
+cd test 그 폴더 안으로 들어가기
+cd .. 하면 다시 상위 폴더로 돌아옴
+cd ~ 하면 home으로 옴
+
+ls 명령 옵션
+-a all
+-s size(KB 단위)
+-l long format(상세정보)
+-F 파일 종류
+-R recursive 모든 하위 디렉토리
+
+맨 위에서 ls -F 하면 심볼릭 링크 출력됨
+cd / 하면 바로 루트로 감
+
+0910
+기본 명령어
+date
+hostname
+whoami
+
+디렉토리 내용 확인
+ls -a -s -l
+
+현재 작업 디렉토리 위치
+pwd
+
+디렉토리 관련 명령
+폴더 만들기 mkdir
+위치 이동 cd
+폴더 지우기 
+~ 홈 디렉토리
+.. 부모
+. 자기 자신
+
+명령어에 대한 간단한 설명을 보고 싶을 때(whatis)
+whatis ls
+명령어가 어디에 있는지 which
+
+dir
+디렉토리 목록 보기
+p 아래에 중간 디렉토리를 만들어라
+mkdir ~/ttest/ex 이건 불가능함
+mkdir -p ~/ttest/ex 이렇게 하면 가능
+홈 밑에 ttest 아래 ex 만들기
+cd ttest
+
+파일 명령어
+cat(concatnate)
+cat ex1.txt
+cat > cs2.txt 하고 내용 쓰고 엔터 컨트롤 D
+cat >> ex1.txt 이미 만들어진 파일에 추가하는 기능
+
+페이지 단위로 파일 내용 보기
+more ex1.txt
+head -10 unix.txt
+wc  단어의 개수 세는 명령어 word count
+-l -w -c 
+줄 단어 문자
+wc -l unix.txt
+
+간단한 파일 만들기
+touch cs3.txt
+
+파일 복사 copy
+cp -i(interactive) 원본파일이름 복사될파일이름
+i 있으면 아예 덮어쓰기 됨(원래 내용 사라진다는 뜻)
+i 없어도 덮어쓰기 되는데..?
+
+ls -l cs2.txt newcs2.txt
+cp cs2.txt /t1 cs2.txt를 t1 폴더 밑에 똑같이 생성해줘 라는 뜼
+
+파일 이동 혹은 이름 바꾸기 move
+mv 원본파일명 변경된파일이름
+mv lyrics.txt nctwish.txt 이름 바꾸기
+mv nctwish.txt .. 상위 폴더로 이동시키기
+
+파일 삭제 remove
+rm -i cs1.txt
+아 i는 걍 물어보기 기능이네
+
+디렉토리 삭제
+디렉토리 안에 아무것도 없을 때 삭제 가능
+rm test 이건 에러
+rm -ri test 이러면 삭제할거냐고 물어보고 싹 삭제
+여기서 다 y 해야 지우기 가능
+
+rm -r
+p 아래에 중간 디렉토리를 만들어라
+이거 두 가지 기억
+
+다음 시간에는 링크 합니다
+
+0915
+지난시간 복습
+i
+cat
+wc wordcount
+ls의 옵션들 -l, -g, -s, -a
+
+오늘 내용
+소프트 링크 - 바로가기
+하드 링크 - 똑같은 것 만들기(임베디드 링킹) 카피하고는 다름. 이런 복제본을 만드는데, 원본이 바뀌면 같이 바뀜 ㅇㅁㅇ
+
+ln ex1.txt music.txt 하드링크 명령어 하는 법
+ls -l 하면 둘이 똑같음
+
+ln -s ex1.txt e.txt
+ls -l
+e.txt -> ex1.txt로 바뀜
+캡쳐본 확인
+그리고 텍스트 파일 수정햇을 때
+캡쳐본 확인
+
+파일 속성
+ls -sl ex1.txt
+rwx 읽기 쓰기 실행
+소유자 그룹 기타
+권한 하드링크 수 2
+
+접근권한 바꾸기 chmod
+rw-rw-r--
+chmod 777 ex1.txt
+복제본의 접근 권한도 같이 바뀐다
+644 = rw-r--r--
+
+chmod g+w ex1.txt
+ls -l ex1.txt
+u g o a  = 사용자 그룹 기타 모든
++/- 권한 더하기 빼기
+r w x = 읽기 쓰기 실행
+리커시브하게 적용 가능
+
+stat ex1.txt 파일에 대한 상태가 궁금해
+
+사용자 추가하고
+cat /etc/passwd |sort
+chown change owner
+sudo chwon gomdori ex1.txt
+ls -l 하면 권한 student에서 gomdori로 바뀐다
+
+그룹 바꾸기
+sudo chgrp cs ex1.txt
+ls -l 하면 그룹이 cs로 바뀜
+
+입출력 재지정과 파이프
+명령어 > 파일
+명령어의 출력을 모니터에 출력하는 게 아니라 텍스트파일에 저장한다
+모니터에 출력 되는데?
+
+cat > mytest.txt
+이러면 화면에 쓰는 내용이 mytest.txt에 저장됨
+
+cat mytest.txt mytest2.txt > mytest3.txt
+
+>> append의 개념
+cat >> mytest3.txt
+파일이 업스면 새로 생성하고 내용이 있으면 추가하라
+
+wc < mytest3.txt
+그냥 wc 하고 내용 입력해도 세줌
+
+문서에서 end가 나오면 멈춰
+wc << end
+
+파이프
+ls | wc -l
+
+3장 프로그래밍
+VM에서 이클립스 설치 -> 프로그래밍
+1. 사전준비
+sudo apt update
+sudo apt install build-essential gdb
+(gcc, make, gdb) 설치됨
+2. Java 런타임 설치(이클립스 실행 용도)
+sudo apt install openjdk-17-jdk
+
+3. 이클립스 다운로드
+사이트에서 리눅스 버전으로x86 .tar.gz 파일
+압축 풀기
+tar -xvzf 다운로드파일명
+
+cd Downloads
+dir
+tar -xvzf 붙여넣기(dir 해서 나온 경로)
+
+0917
+실제로 파일이 만들어지는 과정을 해본다
+포인터와 포인터 변수
+* = 이게 포인터야.. or 그 안에 들어있는 값을 나타냄
+int a = 10;
+int *p = &a; //p는 a의 주소를 나타낸다~
+
+포인터 예 pointer.c
+작성 과정
+1. 소스코드 작성
+pointer.c
+2. 컴파일
+$ gcc -c pointer.c : 목적코드가 된다는 뜻(어셈블리어로 변환함)
+2-2. 이거 하고 ls 하면 pointer.o 생긴거 확인 가능
+3. 실행파일 만들기
+$ gcc -o(out=실행파일 만들겠다) pointer(이게 실행파일 이름) pointer.o(pointer.c로 해도 됨)
+실행파일 이름을 안 주면 무조건 a.out으로 만들어버려~
+pointer.o 하면 오브젝트 파일이 만들어짐 
+3-2. ls -l 하면
+pointer 파일 만들어짐
+4. 이제 pointer 실행시키면 되는데 안 되는 이유 -> 자기 path에서 찾음.. 근데 pointer는 등록이 안 돼있음. 왜이리 멍청한? (보안상의 이유다)
+그래서 ./pointer 이렇게 쳐야 됨
+
+교재 125쪽
+특정 라이브러리 링크 하는 방법 : lm
+ex) math.h : 프로토타입, 함수에 대한 선언만 들어있고 실제로 구현한 내용은 libm에 들어있음. 수학 라이브러리 limb.a 연결하기.
+gcc -o test -lm(link m이라는 뜻) test.c
+루트와 파워(거듭제곱) 함수 써보기
+gcc -o mathdo mathtest.c -lm
+
+0922
+
+string, 구조체, 단일모듈컴파일, 여러개의 모듈이 섞여있을 때의 컴파일, 자동으로 빌드해주는 도구(컴파일, 링킹, 임베딩, 디버그) make 시스템, gdb 다루기
+
+지난시간  복습
+gcc -c 파일이름.c
+gcc -o 실행파일명.c 파일이름.c : 여기다가 실행파일 이름 안쓰면 a.out으로 나온다
+특정 라이브러리를 링킹
+gcc -o 실행파일이름 -lm 소스파일.c : -lm을 마지막에 쓰는듯..?
+
+math 라이브러리 연결하기
+gcc -o mathdo mathtest.c -lm
+
+링킹 필요 없는 라이브러리
+time, string
+
+링킹 필요한 라이브러리
+math.h : -lm
+dlfcn.h : -ldl 동적할당
+zlib.h : -lz 압축
+crypt.h -lcrypt 암호화
+
+음 왜 이게 실행이 안되지
+
+
+배열과 포인터
+배열은 첫 번째 주소만 알면 돼
+
+구조체를 꼭 할 필요가 있나.....?... ㄴㄴ래
+
+아니 왜 실행이 안되냐고
+
+130쪽
+자동 빌드 도구
+make 시스템
+make 파일 만들기 : 이 안에 실행파일을 만들기 위해서 사용되는 파일들 사이의 상호 의존 관계와 실행 파일을 만드는 방법을 기술함. 이름은 지정되어 있음.(GNUmake or Makefile or makefile). 텍스트 에디터로 작성하면 됨. 단, 의존 관계를 표현하고 실행파일 만드는 명령어는 안쪽으로 tab 키 써야 됨. 들여쓰기로 써야 명령인 줄 인식함!!
+
+main:main.o copy.o
+	gcc -o main main.o copy.o
+main.o: main.c copy.h #main.o는 어떻게 만들어지냐면~
+	gcc -c main.c
+copy.o: copy.c
+	gcc -c copy.c
+
+make 실행
+make 쓰면
+gcc -c main.c -> main.o 생성
+gcc -c copy.c -> copy.o 생성
+gcc -o main main.o copy.o -> 링크해서 main 생성
+이 세 줄이 자동으로 주르륵 써짐
+그리고 ./main 하면 화면에 글씨 쓰라고 나옴. 컨트롤 D 하면 제일 긴 문장 나옴
+왜지?? longest 출력하게 되어있대
+
+132쪽 디버거 gdb 아까 메이크가 더 중요
+-g 디버깅 정보를 포함해줘 라는 옵션
+
+gcc -g -c main.c
+gcc -g -c copy.c
+gcc -g -o main main.o copy.o
+gdb ./main
+
+l copy 하면 함수 읽어옴
+b copy 브레이크 함
+info b 브레이크 주소에 대한 정보 알려줘
+run 실행
+
+135쪽
+걍 해보자 책을 보고
+gdb 실행했을 때 c를 쓰지 말고 r 쓰기
+r
+문장
+p from
+n
+n
+p to
+이렇게?
+
+0924
+
+파일 입출력
+155페이지
+파일 입출력 모드 뭐가 많네
+버퍼를 처리하는 방법
+상태를 확인하기 위한 플래그
+읽기 쓰기 모드를 확인하는 플래그
+
+표준 입력/출력/오류
+
+파일 닫기
+흠 걍 뭐하는지 모르겠다
+
+텍스트 파일 처리
+
+표준입출력함수와 파일입출력 함수의 차이점을 구분할 수 있어야 됨 159쪽 표 외우기
+에코가 되냐, 화면에 나타나냐(버퍼)를 기준으로 본다
+1. 문자 하나 입력/출력
+getchar() : 한 문자를 읽음. 엔터를 칠 때까지 입력 버퍼에 쌓아놨다가 프로그램에 전달
+fgetc(FILE *)
+getch() : 한 문자를 읽음 <conio.h> 한 문자 칠 때마다 화면에 안나옴. 엔터 없이 바로바로 내보낸다. 예시; 게임, 메뉴 선택, 암호 입력
+출력
+putchar()
+fputc(FILE *)
+putch() : 콘솔에서 한 문자 출력
+
+2. 문자열 입력/출력
+gets(str) : 문자열 입력. 근데 이제 안써. 왜냐면 버퍼 사이즈 지정이 없어서 버퍼 오버플로우가 되... 그니까 이거 쓰지 마~~
+fgets(str, n, FILE *) : 문자열을 n만큼 쓰고 다 쓰면 파일 포인터를 반환해줌. 얘를 쓰세요
+출력
+puts(str) : 문자열을 출력한 뒤에 자동으로 \n 추가
+fputs(str, FILE *)
+
+3. 형식 입력
+scanf("포맷", &변수) : 형식 지정 입력
+fscanf(FILE *, "포맷", &변수)
+printf("포맷", 값)
+fprintf(FILE *, "포맷", 값)
+
+getc() : 매크로로 인식해서 실행 빨라짐
+fgetc() : 이건 따로 함수로 인식함
+
+실습 교재 161쪽
+cat copy.h를 해보겠다
+인수가 총 몇 개야? = argc에 들어감. 명령현 인수를 받는거임
+argv[1] = 첫 번째 줄부터 "r" 읽기
+putc(c, stdout) 읽은 문자를 표준 출력에 출력
